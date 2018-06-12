@@ -12,10 +12,19 @@
 * 各投稿に対してスレッドで会話をすることができる
 
 
-# モデル
+## モデル
 
-* Userモデル
-
+* User(ユーザー)モデル
+  * account_name
+  * email
+  * password
+  * 
+  * user_name
+  * 
+* Contribution(投稿)モデル
+  * content
+  * date
+  * thread
 
 
 This README would normally document whatever steps are necessary to get the
