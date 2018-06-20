@@ -16,27 +16,42 @@
 ## モデル
 
 * User(ユーザー)モデル
-  * user_id
+  * id
     * ユーザーのid番号
-  * account_name
+  * account_id
     * ユーザーアカウントの一意な名前（アルファベット)
   * email
     * メールアドレス
   * password
     * パスワード
-  * user_name
+  * name
     * 表示される名前
+  * thumbnail
+    * サムネイル画像
+  * following_users
+    * フォローしているユーザー
+  * followers
+    * フォロワー
+  * profile
+    * プロフィール
 
-* Contribution(投稿)モデル
-  * contribution_id
+* Post(投稿)モデル
+  * id
     * 投稿の一意なid
-  * content
-    * 投稿内容（文章）
-  * date
+  * id_of_posted_user
+    * 投稿したユーザーのid
+  * id_of_replied_post
+    * 返信された投稿のid
+  * date_time
     * 投稿された日付・時間
-  * thread
-  * 
-
+  * text_content
+    * 投稿内容（文章）
+  * image_content
+    * 投稿内容（画像）
+  * likes
+    * いいね!の数
+  * diffusion
+    * 拡散された数
 * thread（スレッド）モデル
 
 This README would normally document whatever steps are necessary to get the
