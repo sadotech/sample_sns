@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_of_posted_user: 1
+  id_of_replied_post: 1
+  date_time: 2018-06-20 21:06:03
+  text_content: MyString
+  image_content_id: 1
+  id_of_liked_user: 1
+  id_of_diffusion_user: 1
+
+two:
+  id_of_posted_user: 1
+  id_of_replied_post: 1
+  date_time: 2018-06-20 21:06:03
+  text_content: MyString
+  image_content_id: 1
+  id_of_liked_user: 1
+  id_of_diffusion_user: 1
