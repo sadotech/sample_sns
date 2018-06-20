@@ -26,14 +26,14 @@
     * パスワード
   * name
     * 表示される名前
-  * thumbnail
-    * サムネイル画像
+  * thumbnail_id
+    * サムネイル画像のid
   * following_users
     * フォローしているユーザー
   * followers
     * フォロワー
   * profile
-    * プロフィール
+    * プロフィールのid
 
 * Post(投稿)モデル
   * id
@@ -46,13 +46,18 @@
     * 投稿された日付・時間
   * text_content
     * 投稿内容（文章）
-  * image_content
-    * 投稿内容（画像）
-  * likes
-    * いいね!の数
-  * diffusion
-    * 拡散された数
-* thread（スレッド）モデル
+  * image_content_id
+    * 投稿画像のid
+  * id_of_liked_user
+    * いいね!をくれたユーザーのid
+  * id_of_diffusion_user
+    * 拡散したユーザーのid
+
+* thumbnailモデル
+  * 
+
+* image_contentモデル
+  * 
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
