@@ -1,2 +1,15 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>About | Ruby on Rails Tutorial Sample App</title>
+  </head>
+  <body>
+    <h1>ユーザー登録</h1>
+    <%= form_for @user do |f| %>
+      <p>アカウントID：<%= text_field f, :account_id %></p>
+      <p>メールアドレス：<%= text_field f, :email %></p>
+      <p>パスワード：<%= text_field f, :password %></p>
+      <p> <%= submit_tag "登録" %>
+    <% end %>
+  </body>
+</html>
