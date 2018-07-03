@@ -6,9 +6,9 @@
   <body>
     <h1>ユーザー登録</h1>
     <%= form_for @user do |f| %>
-      <p>アカウントID：<%= text_field f, :account_id %></p>
-      <p>メールアドレス：<%= text_field f, :email %></p>
-      <p>パスワード：<%= text_field f, :password %></p>
+      <p>アカウントID：<%= f.text_field :account_id %></p>
+      <p>メールアドレス：<%= f.text_field :email %></p>
+      <p>パスワード：<%= f.text_field :password %></p>
       <p> <%= submit_tag "登録" %>
     <% end %>
   </body>
