@@ -1,2 +1,13 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>About | Ruby on Rails Tutorial Sample App</title>
+  </head>
+  <body>
+    <h1>投稿</h1>
+    <%= form_for @post, :url => { action: 'new' } do |f| %>
+      <p>投稿内容：<%= f.text_field :text_content %></p>
+      <p> <%= submit_tag "投稿" %>
+    <% end %>
+  </body>
+</html>

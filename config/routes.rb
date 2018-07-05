@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources 'users'
   resources 'posts'
   
+  #get 'users/:id/posts/new', to: 'posts#new'
+  #get 'users/:id/posts/', to: 'posts#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

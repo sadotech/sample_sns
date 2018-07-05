@@ -1,2 +1,16 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>About | Ruby on Rails Tutorial Sample App</title>
+  </head>
+  <body>
+    <h1>TimeLine</h1>
+    <% @posts.each do |post| %>
+      <ul>
+        <li>投稿ID：<%= post.id %></li>
+        <li>投稿者：</li>
+        <li>投稿：<%= post.text_content %></li>
+      </ul>
+    <% end %>
+  </body>
+</html>
