@@ -6,10 +6,10 @@
   <body>
     <h1>ログイン</h1>
     <%= form_for :session, url: login_path do |f| %>
-      <p>アカウントID：<%= f.text_field :account_id %></p>
       <p>メールアドレス：<%= f.text_field :email %></p>
       <p>パスワード：<%= f.text_field :password %></p>
-      <p> <%= submit_tag "ログイン" %>
+      <p> <%= submit_tag "ログイン" %></p>
+      <p><%= link_to "新規アカウント作成", new_user_path %></p>
     <% end %>
   </body>
 </html>
