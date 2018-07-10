@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  root 'users#new'
+  root 'sessions#new'
   resources 'users'
   resources 'posts'
   

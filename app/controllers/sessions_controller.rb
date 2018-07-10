@@ -4,10 +4,12 @@ class SessionsController < ApplicationController
   end
 
   def create
-    render 'new'
+    user = User.find_by(email: params[:session][:email])
+    return render 'new' if user.nil?
+    redirect_to user
   end
 
   def destroy
-    
+
   end
 end
