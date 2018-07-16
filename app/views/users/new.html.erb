@@ -9,6 +9,7 @@
       <p>アカウントID：<%= f.text_field :account_id %></p>
       <p>メールアドレス：<%= f.text_field :email %></p>
       <p>パスワード：<%= f.text_field :password %></p>
+      <p>パスワード（確認用）：<%= f.text_field :password_confirmation %></p>
       <p> <%= submit_tag "登録" %>
     <% end %>
   </body>

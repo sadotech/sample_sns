@@ -7,7 +7,8 @@ class UsersController < ApplicationController
     user = User.new(
       account_id: user_params[:account_id], 
       email: user_params[:email],
-      password: user_params[:password]
+      password: user_params[:password],
+      password_confirmation: user_params[:password_confirmation]
     )
 
     if user.save
@@ -38,6 +39,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:account_id, :email, :password)
+    params.require(:user).permit(:account_id, :email, :password, :password_confirmation)
   end
 end

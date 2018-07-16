@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180620120603) do
+ActiveRecord::Schema.define(version: 20180716070530) do
 
   create_table "posts", force: true do |t|
     t.integer  "id_of_posted_user"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20180620120603) do
     t.integer  "thumbnail_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_digest"
   end
 
 end
