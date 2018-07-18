@@ -13,5 +13,6 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    redirect_to 'new'
   end
 end
