@@ -11,11 +11,12 @@
   <div id="header_fixed">
     <ul>
       <li class="title_name">SampleSNS</li>
+      <% if !@login_user.nil? %>
+        <!-- TODO: ログイン状態の保持。現状ではページを離脱するとログイン@login_userがnilとなる。 -->
+        <li class="header_link">login: <%= @login_user.id %></li>
+      <% end %>
       <li class="header_link"><%= link_to "Timeline", posts_path %></li>
       <li class="header_link"><%= link_to "Users", users_path %></li>
-      <% if user_signed_in? %>
-        <li class="header_link"><%= %></li>
-      <% end %>
     </ul>
   </div>
 

@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
-  get 'login' => 'sessions#new'
-  post 'login' => 'sessions#create'
-  delete 'logout' => 'sessions#destroy'
-
   root 'sessions#new'
   resources 'users'
   resources 'posts'
+  
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
+  get 'login_user' => 'users#show_login_user'
+
   
   #get 'users/:id/posts/new', to: 'posts#new'
   #get 'users/:id/posts/', to: 'posts#index'
