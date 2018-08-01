@@ -30,6 +30,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def show_login_user
+    @login_user = User.find(params[:id])
+  end
+
   def update
   end
 
