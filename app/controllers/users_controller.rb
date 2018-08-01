@@ -19,14 +19,17 @@ class UsersController < ApplicationController
   end
 
   def edit
+    redirect_to login_path if session[:login_id].blank?
     @user = User.find(params[:id])
   end
 
   def index
+    redirect_to login_path if session[:login_id].blank?
     @users = User.all
   end
 
   def show
+    redirect_to login_path if session[:login_id].blank?
     @user = User.find(params[:id])
   end
 
@@ -35,6 +38,10 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = User.find_by(params[:id])
+    @user[:name] = params[:user][:name].blank? ? nil : params[:user][:name]
+    @user.save
+    render "show"
   end
 
   def destroy

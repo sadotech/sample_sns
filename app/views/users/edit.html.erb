@@ -5,11 +5,13 @@
   </head>
   <body>
     <h1>ユーザー情情</h1>
-    <% form_for User.find_by id: session[:login_id] do |f| %>
+    <%= form_for @user do |f| %>
       <p>ユーザーID：<%= @user.id %></p>
       <p>アカウントID：<%= @user.account_id %></p>
       <p>メールアドレス：<%= @user.email %></p>
-      <p><%= text_field %></p> 
+      <!-- TODO: 初期値が入力された状態で表示したい -->
+      <p>アカウント名：<%= f.text_field :name %></p> 
+      <%= submit_tag "編集" %>
     <% end %>
   </body>
 </html>

@@ -8,5 +8,7 @@
     <p>ユーザーID：<%= @user.id %></p>
     <p>アカウントID：<%= @user.account_id %></p>
     <p>メールアドレス：<%= @user.email %></p>
+    <p>アカウント名：<%= @user.name.blank? ? "未設定" : @user.name %></p>
+    <p><%= link_to "ユーザー情報を編集", edit_user_path %></p>
   </body>
 </html>
