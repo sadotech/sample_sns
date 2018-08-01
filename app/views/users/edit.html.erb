@@ -5,8 +5,11 @@
   </head>
   <body>
     <h1>ユーザー情情</h1>
-    <p>ユーザーID：<%= @user.id %></p>
-    <p>アカウントID：<%= @user.account_id %></p>
-    <p>メールアドレス：<%= @user.email %></p>
+    <% form_for User.find_by id: session[:login_id] do |f| %>
+      <p>ユーザーID：<%= @user.id %></p>
+      <p>アカウントID：<%= @user.account_id %></p>
+      <p>メールアドレス：<%= @user.email %></p>
+      <p><%= text_field %></p> 
+    <% end %>
   </body>
 </html>
