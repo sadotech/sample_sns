@@ -4,10 +4,15 @@
     <title>About | Ruby on Rails Tutorial Sample App</title>
   </head>
   <body>
-    <h1>投稿</h1>
-    <%= form_for @post, :url => { action: 'new' } do |f| %>
-      <p>投稿内容：<%= f.text_field :text_content %></p>
-      <p> <%= submit_tag "投稿" %>
+    <% if !session[:login_id] %>
+      <p>ログインしてください。</p>
+      <p><%= link_to "ログイン", login_path %></p>
+    <% else %>
+      <h1>投稿</h1>
+      <%= form_for @post, :url => { action: 'new' } do |f| %>
+        <p>投稿内容：<%= f.text_field :text_content %></p>
+        <p> <%= submit_tag "投稿" %>
     <% end %>
+  <% end %>
   </body>
 </html>

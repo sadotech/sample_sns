@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>About | Ruby on Rails Tutorial Sample App</title>
+  </head>
+  <body>
+    <% if !session[:login_id] %>
+      <p>ログインしてください。</p>
+    <% else %>
+      <p>ログアウトが完了しました。</p>
+    <% end %>
+      <p><%= link_to "ログイン", login_path %></p>
+  </body>
+</html>

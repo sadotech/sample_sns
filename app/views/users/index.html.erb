@@ -4,14 +4,19 @@
     <title>About | Ruby on Rails Tutorial Sample App</title>
   </head>
   <body>
-    <h1>ユーザー情情</h1>
-    <% @users.each do |user| %>
-      <ul>
-        <li>ユーザーID：<%= user.id %></li>
-        <li>アカウントID：<%= user.account_id %></li>
-        <li>メールアドレス：<%= user.email %></li>
-        <li>アカウント名：<%= user.name %></li>
-      </ul>
+    <% if !session[:login_id] %>
+      <p>ログインしてください。</p>
+      <p><%= link_to "ログイン", login_path %></p>
+    <% else %>
+      <h1>ユーザー情情</h1>
+      <% @users.each do |user| %>
+        <ul>
+          <li>ユーザーID：<%= user.id %></li>
+          <li>アカウントID：<%= user.account_id %></li>
+          <li>メールアドレス：<%= user.email %></li>
+          <li>アカウント名：<%= user.name %></li>
+        </ul>
+      <% end %>
     <% end %>
   </body>
 </html>

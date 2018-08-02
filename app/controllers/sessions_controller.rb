@@ -17,7 +17,11 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out
-    render 'new'
+    if !session[:login_id]
+      render 'destroy'
+    else
+      log_out
+      render 'destroy'
+    end
   end
 end

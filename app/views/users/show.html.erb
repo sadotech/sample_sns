@@ -4,11 +4,16 @@
     <title>About | Ruby on Rails Tutorial Sample App</title>
   </head>
   <body>
-    <h1>ユーザー情情</h1>
-    <p>ユーザーID：<%= @user.id %></p>
-    <p>アカウントID：<%= @user.account_id %></p>
-    <p>メールアドレス：<%= @user.email %></p>
-    <p>アカウント名：<%= @user.name.blank? ? "未設定" : @user.name %></p>
-    <p><%= link_to "ユーザー情報を編集", edit_user_path %></p>
+    <% if !session[:login_id] %>
+      <p>ログインしてください。</p>
+      <p><%= link_to "ログイン", login_path %></p>
+    <% else %>
+      <h1>ユーザー情情</h1>
+      <p>ユーザーID：<%= @user.id %></p>
+      <p>アカウントID：<%= @user.account_id %></p>
+      <p>メールアドレス：<%= @user.email %></p>
+      <p>アカウント名：<%= @user.name.blank? ? "未設定" : @user.name %></p>
+      <p><%= link_to "ユーザー情報を編集", edit_user_path %></p>
+    <% end %>
   </body>
 </html>

@@ -19,17 +19,14 @@ class UsersController < ApplicationController
   end
 
   def edit
-    redirect_to login_path if session[:login_id].blank?
     @user = User.find(params[:id])
   end
 
   def index
-    redirect_to login_path if session[:login_id].blank?
     @users = User.all
   end
 
   def show
-    redirect_to login_path if session[:login_id].blank?
     @user = User.find(params[:id])
   end
 
