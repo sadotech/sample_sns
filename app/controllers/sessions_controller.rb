@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
 
   def destroy
     if !session[:login_id]
-      render 'destroy'
+      render 'destroy', no_login: true
     else
       log_out
       render 'destroy'

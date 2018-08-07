@@ -9,6 +9,7 @@
       <p><%= link_to "ログイン", login_path %></p>
     <% else %>
       <h1>TimeLine</h1>
+      <p><%= link_to "投稿する", new_post_path %></p>
       <% @posts.each do |post| %>
         <ul>
           <li>投稿ID：<%= post.id %></li>

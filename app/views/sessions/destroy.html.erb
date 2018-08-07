@@ -4,7 +4,7 @@
     <title>About | Ruby on Rails Tutorial Sample App</title>
   </head>
   <body>
-    <% if !session[:login_id] %>
+    <% if params[:no_login] %>
       <p>ログインしてください。</p>
     <% else %>
       <p>ログアウトが完了しました。</p>
