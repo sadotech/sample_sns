@@ -13,7 +13,15 @@
       <p>アカウントID：<%= @user.account_id %></p>
       <p>メールアドレス：<%= @user.email %></p>
       <p>アカウント名：<%= @user.name.blank? ? "未設定" : @user.name %></p>
-      <p><%= link_to "ユーザー情報を編集", edit_user_path %></p>
+      <% if session[:login_id].to_s == params[:id] %>
+        <p><%= link_to "ユーザー情報を編集", edit_user_path %></p>
+      <% else %>
+        <p>フォローする</p>
+      <% end %>
+      <ul>
+        <li>フォロー</li>
+        <li>フォロワー</li>
+      </ul>
     <% end %>
   </body>
 </html>

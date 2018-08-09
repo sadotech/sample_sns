@@ -7,7 +7,7 @@
     <% if !session[:login_id] %>
       <p>ログインしてください。</p>
       <p><%= link_to "ログイン", login_path %></p>
-    <% elsif session[:login_id] && session[:login_id] != params[:id] %>
+    <% elsif session[:login_id] && session[:login_id].to_s != params[:id] %>
       <p>アカウントを切り替えてください。</p>
       <p><%= link_to "ログアウト", logout_path, method: :delete %></p>
     <% else %>
