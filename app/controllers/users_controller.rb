@@ -31,10 +31,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def show_login_user
-    @login_user = User.find(params[:id])
-  end
-
   def update
     @user = User.find_by(params[:id])
     @user[:name] = params[:user][:name].blank? ? nil : params[:user][:name]
@@ -45,6 +41,21 @@ class UsersController < ApplicationController
   def destroy
   end
 
+  def follow
+    active_relationships.create(followed_id: other_user.id)
+  end
+
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  def following?(other_user)
+    following.include?(other_user)
+  end
+
+  def following
+    @user = User.find_by(params[:id])
+  end
   private
 
   def user_params

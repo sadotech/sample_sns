@@ -8,7 +8,12 @@ Rails.application.routes.draw do
   get 'logout' => 'session#destroy'
   delete 'logout' => 'sessions#destroy'
 
-  
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end 
+
   #get 'users/:id/posts/new', to: 'posts#new'
   #get 'users/:id/posts/', to: 'posts#index'
   # The priority is based upon order of creation: first created -> highest priority.
