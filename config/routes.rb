@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end 
+  get 'follow_user' => 'users#follow'
+  get 'unfollow_user' => 'users#unfollow'
 
   #get 'users/:id/posts/new', to: 'posts#new'
   #get 'users/:id/posts/', to: 'posts#index'

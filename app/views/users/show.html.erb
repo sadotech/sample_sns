@@ -16,11 +16,17 @@
       <% if session[:login_id].to_s == params[:id] %>
         <p><%= link_to "ユーザー情報を編集", edit_user_path %></p>
       <% else %>
-        <p>フォローする</p>
+        <% if @following %>
+          <p>フォロー中</p>
+          <p><%= link_to "フォローを解除", unfollow_user_path(id: @user.id, other_user_id: session[:login_id]) %></p>
+        <% else %>
+          <p><%= link_to "フォローする", follow_user_path(id: @user.id, other_user_id: session[:login_id]) %></p>
+        <% end %>
+        <p><%= "あなたをフォロー中" if @followed %></p>
       <% end %>
       <ul>
-        <li><%= link_to "フォロー", following_user_path(@user) %></li>
-        <li><%= link_to "フォロワー", followers_user_path(@user) %></li>
+        <li><%= link_to "フォロー", following_user_path %></li>
+        <li><%= link_to "フォロワー", followers_user_path %></li>
       </ul>
     <% end %>
   </body>

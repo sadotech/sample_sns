@@ -29,6 +29,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    other_user = User.find(session[:login_id])
+    @following = following?(other_user)
+    @followed = followed?(other_user)
   end
 
   def update
@@ -42,19 +45,34 @@ class UsersController < ApplicationController
   end
 
   def follow
-    active_relationships.create(followed_id: other_user.id)
+    @user = User.find(params[:id])
+    other_user = User.find(params[:other_user_id])
+    other_user.active_relationships.create(followed_id: @user.id)
+    redirect_to user_path(id: @user.id)
   end
 
-  def unfollow(other_user)
-    active_relationships.find_by(followed_id: other_user.id).destroy
+  def unfollow
+    @user = User.find(params[:id])
+    other_user = User.find(params[:other_user_id])
+    other_user.active_relationships.find_by(followed_id: @user.id).destroy
+    redirect_to user_path(id: @user.id)
   end
 
   def following?(other_user)
-    following.include?(other_user)
+    # other_user(=ログインしているユーザー)のfollowingの中に@userがいるか確認
+    other_user.following.include?(@user)
+  end
+
+  def followed?(other_user)
+    @user.following.include?(other_user)
   end
 
   def following
-    @user = User.find_by(params[:id])
+    @user = User.find(params[:id])
+  end
+
+  def followers
+    @user = User.find(params[:id])
   end
   private
 

@@ -8,12 +8,12 @@
       <p>ログインしてください。</p>
       <p><%= link_to "ログイン", login_path %></p>
     <% else %>
-      <h1><%= "#{@user.account_id}がフォローしているアカウント" %></h1>
-      <% @user.following.reverse.each do |f| %>
+      <h1><%= "#{@user.account_id}をフォローしているアカウント" %></h1>
+      <% @user.followers.reverse.each do |f| %>
         <ul>
           <p><%= link_to f.account_id, user_path(f.id) %></p>
         </ul>
-      <% end %>
+      <% end %> 
     <% end %>
   </body>
 </html>
