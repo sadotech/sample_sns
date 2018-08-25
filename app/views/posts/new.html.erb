@@ -9,10 +9,14 @@
       <p><%= link_to "ログイン", login_path %></p>
     <% else %>
       <h1>投稿</h1>
-      <%= form_for @post, :url => { action: 'new' } do |f| %>
-        <p>投稿内容：<%= f.text_field :text_content %></p>
-        <p> <%= submit_tag "投稿" %>
+      <%= form_for @post do |f| %>
+        <p>投稿内容：<%= f.text_field :content %></p>
+        <% if params[:reply] %>
+          <p><%= submit_tag "返信" %></p>
+        <% else %>
+          <p><%= submit_tag "投稿" %></p>
+        <% end %>
+      <% end %>
     <% end %>
-  <% end %>
   </body>
 </html>

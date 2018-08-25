@@ -1,3 +1,10 @@
+/*
+a:link{color: blue;}
+a:visited{color: blue;}
+a:hover{color: blue;}
+a:active{color: blue;}
+*/
+
 div#header_fixed{
   position: fixed;            /* ヘッダーの固定 */
   background: #000;
@@ -23,6 +30,7 @@ div#header_fixed ul{
 .header_link{
   float: right;
   margin-top: 30px;
+  color: white;
 }
 
 body{

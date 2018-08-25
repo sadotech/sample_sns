@@ -29,9 +29,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    other_user = User.find(session[:login_id])
-    @following = following?(other_user)
-    @followed = followed?(other_user)
+    login_user = User.find(session[:login_id])
+    @following = following?(login_user)
+    @followed = followed?(login_user)
   end
 
   def update
@@ -46,25 +46,25 @@ class UsersController < ApplicationController
 
   def follow
     @user = User.find(params[:id])
-    other_user = User.find(params[:other_user_id])
-    other_user.active_relationships.create(followed_id: @user.id)
+    login_user = User.find(params[:login_user_id])
+    login_user.active_relationships.create(followed_id: @user.id)
     redirect_to user_path(id: @user.id)
   end
 
   def unfollow
     @user = User.find(params[:id])
-    other_user = User.find(params[:other_user_id])
-    other_user.active_relationships.find_by(followed_id: @user.id).destroy
+    login_user = User.find(params[:login_user_id])
+    login_user.active_relationships.find_by(followed_id: @user.id).destroy
     redirect_to user_path(id: @user.id)
   end
 
-  def following?(other_user)
-    # other_user(=ログインしているユーザー)のfollowingの中に@userがいるか確認
-    other_user.following.include?(@user)
+  def following?(login_user)
+    # login_user(=ログインしているユーザー)のfollowingの中に@userがいるか確認
+    login_user.following.include?(@user)
   end
 
-  def followed?(other_user)
-    @user.following.include?(other_user)
+  def followed?(login_user)
+    @user.following.include?(login_user)
   end
 
   def following

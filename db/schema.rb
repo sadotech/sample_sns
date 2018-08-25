@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180808131216) do
+ActiveRecord::Schema.define(version: 20180822003546) do
 
   create_table "follow_relationships", force: true do |t|
     t.datetime "created_at"
@@ -24,15 +24,10 @@ ActiveRecord::Schema.define(version: 20180808131216) do
   end
 
   create_table "posts", force: true do |t|
-    t.integer  "id_of_posted_user"
-    t.integer  "id_of_replied_post"
-    t.datetime "date_time"
-    t.string   "text_content"
-    t.integer  "image_content_id"
-    t.integer  "id_of_liked_user"
-    t.integer  "id_of_diffusion_user"
+    t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "relationships", force: true do |t|
@@ -45,6 +40,13 @@ ActiveRecord::Schema.define(version: 20180808131216) do
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id"
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
+
+  create_table "reply_relationships", force: true do |t|
+    t.integer  "replying_id"
+    t.integer  "replied_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "account_id"
