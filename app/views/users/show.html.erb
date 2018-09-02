@@ -28,6 +28,52 @@
         <li><%= link_to "フォロー", following_user_path %></li>
         <li><%= link_to "フォロワー", followers_user_path %></li>
       </ul>
+
+
+      <h3><%= @user.account_id %>さんの投稿</h3>
+      <!--ここからposts#index-->
+      <div>
+        <ul>
+          <% @posts.each do |post| %>
+            <%  if post.sharing.present? %>
+              <%= User.find(post.user_id).account_id %>さんがシェア
+              <% share_post_id = post.id %>
+              <% post = post.sharing %>
+            <% end %>
+
+            <li>
+              <%= link_to User.find(post.user_id).account_id, user_path(id: post.user_id) %>
+              <%= post.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+            </li>
+
+            <p>
+            <% if post.replying.present? %>
+              to: <%= link_to User.find(post.replying.user_id).account_id, user_path(id: User.find(post.replying.user_id).id) %><br>
+            <% end %>
+            <%= post.content %><br>
+            </p>
+
+            <p>
+            <%= link_to "詳細", post_path(id: post.id) %>
+            <%= link_to "返信", new_post_path(reply: {replying_id: session[:login_id], main_post_id: post.id}) %>:
+            <%= post.replied.length %><br>
+            <% if post.shared.map(&:user_id).include?(session[:login_id]) %>
+              <%= link_to "シェア", destroy_share_path(post: {id: post.id, share_post_id: share_post_id}) %>: <%= post.shared.length %><br>
+            <% else %>
+              <%= link_to "シェア", share_path(post: {id: post.id}) %>: <%= post.shared.length %><br>
+            <% end %>
+            <% if post.likes.find_by(user_id: session[:login_id]).present? %>
+              <%= link_to "いいね", like_path(id: post.likes.find_by(user_id: session[:login_id]).id, like: {post_id: post.id}), method: :delete %>: <%= post.likes.length %>
+            <% else %>
+              <%= link_to "いいね", likes_path(like: {post_id: post.id}), method: :post %>: <%= post.likes.length %><br>
+            <% end %>
+            </p>
+
+          <% end %>
+        </ul>
+
+      </div>
+      <!--ここまでposts#index-->
     <% end %>
   </body>
 </html>

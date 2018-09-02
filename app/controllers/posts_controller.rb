@@ -1,16 +1,21 @@
 class PostsController < ApplicationController
   def new
-    binding.pry
     @post = Post.new
   end
 
   def create
     login_user = User.find(session[:login_id])
     login_user.posts.create(content: params[:post][:content])
+    if params[:post][:main_post_id]
+      replying_post = login_user.posts.last
+      replied_post = Post.find(params[:post][:main_post_id])
+      replied_post.replied_relationships.create(reply_post_id: replying_post.id)
+    end
     redirect_to posts_path
   end
 
   def edit
+    @post = Post.find(params[:id])
   end
 
   def index
@@ -27,6 +32,28 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id])
+  end
+
+  def share
+    login_user = User.find(session[:login_id])
+    share_post = login_user.posts.create()
+    origin_post = Post.find(params[:post][:id])
+    if !origin_post.shared.map(&:user_id).include?(login_user.id)
+      origin_post.shared_relationships.create(share_post_id: share_post.id)
+    end
+    redirect_to posts_path
+  end
+
+  def destroy_share
+    login_user = User.find(session[:login_id])
+    origin_post = Post.find(params[:post][:id])
+    share_post = Post.find(params[:post][:share_post_id])
+    if origin_post.shared.include?(share_post)
+      origin_post.shared_relationships.find_by(share_post_id: share_post.id).destroy
+      share_post.destroy
+    end
+    redirect_to posts_path
   end
 
   def update

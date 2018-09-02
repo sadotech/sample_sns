@@ -11,11 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180822003546) do
+ActiveRecord::Schema.define(version: 20180828003422) do
 
   create_table "follow_relationships", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "likes", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "post_id"
   end
 
   create_table "post_relationships", force: true do |t|
@@ -28,6 +35,7 @@ ActiveRecord::Schema.define(version: 20180822003546) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "replying_post_id"
   end
 
   create_table "relationships", force: true do |t|
@@ -44,6 +52,15 @@ ActiveRecord::Schema.define(version: 20180822003546) do
   create_table "reply_relationships", force: true do |t|
     t.integer  "replying_id"
     t.integer  "replied_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "main_post_id"
+    t.integer  "reply_post_id"
+  end
+
+  create_table "shares", force: true do |t|
+    t.integer  "origin_post_id"
+    t.integer  "share_post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

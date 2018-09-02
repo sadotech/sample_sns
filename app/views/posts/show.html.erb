@@ -1,7 +1,41 @@
-<% if !session[:login_id] %>
-  <p>ログインしてください。</p>
-  <p><%= link_to "ログイン", login_path %></p>
-<% else %>
-  <h1>Posts#show</h1>
-  <p>Find me in app/views/posts/show.html.erb</p>
-<% end %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>About | Ruby on Rails Tutorial Sample App</title>
+  </head>
+  <body>
+    <% if !session[:login_id] %>
+      <p>ログインしてください。</p>
+      <p><%= link_to "ログイン", login_path %></p>
+    <% else %>
+      <h1>投稿詳細</h1>
+
+      <% if @post.replying.present? %>
+        <ul>
+          <li>
+            <%= link_to User.find(@post.replying.user_id).account_id, user_path(id: @post.replying.user_id) %>
+            <%= @post.replying.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+          </li>
+          <p><%= @post.replying.content %></p>
+        </ul>
+      <% end %>
+
+      <p><%= link_to User.find(@post.user_id).account_id, user_path(id: @post.user_id) %>
+    <%= @post.created_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+      <p><%= @post.content %></p>
+
+      <% if @post.replied.present? %>
+        <ul>
+        <% @post.replied.each do |reply| %>
+          <li>
+            <%= link_to User.find(reply.user_id).account_id, user_path(id: @post.user_id) %>
+            <%= reply.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+          </li>
+          <p><%= reply.content %></p>
+        <% end %>
+        </ul>
+      <% end %>
+
+    <% end %>
+  </body>
+</html>

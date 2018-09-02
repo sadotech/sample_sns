@@ -29,6 +29,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts.reverse
     login_user = User.find(session[:login_id])
     @following = following?(login_user)
     @followed = followed?(login_user)

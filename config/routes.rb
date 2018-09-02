@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'sessions#new'
   resources 'users'
   resources 'posts'
+  resources 'likes'
   
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
@@ -15,6 +16,9 @@ Rails.application.routes.draw do
   end 
   get 'follow_user' => 'users#follow'
   get 'unfollow_user' => 'users#unfollow'
+
+  get 'share' => 'posts#share'
+  get 'destroy_share' => 'posts#destroy_share'
 
   #get 'users/:id/posts/new', to: 'posts#new'
   #get 'users/:id/posts/', to: 'posts#index'

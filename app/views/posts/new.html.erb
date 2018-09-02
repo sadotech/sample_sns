@@ -12,6 +12,8 @@
       <%= form_for @post do |f| %>
         <p>投稿内容：<%= f.text_field :content %></p>
         <% if params[:reply] %>
+
+          <%= f.hidden_field :main_post_id, value: params[:reply][:main_post_id] %>
           <p><%= submit_tag "返信" %></p>
         <% else %>
           <p><%= submit_tag "投稿" %></p>
