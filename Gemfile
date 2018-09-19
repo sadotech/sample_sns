@@ -45,3 +45,6 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
+
+gem 'slim-rails'
+gem 'html2slim'

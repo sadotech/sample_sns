@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    title
+      | About | Ruby on Rails Tutorial Sample App
+  body
+    - if !session[:login_id]
+      p
+        | ログインしてください。
+      p
+        = link_to "ログイン", login_path
+    - elsif session[:login_id] && session[:login_id].to_s != params[:id]
+      p
+        | アカウントを切り替えてください。
+      p
+        = link_to "ログアウト", logout_path, method: :delete
+    - else
+      h1
+        | ユーザー情情
+      = form_for @user do |f|
+        p
+          | ユーザーID：
+          = @user.id
+        p
+          | アカウントID：
+          = @user.account_id
+        p
+          | メールアドレス：
+          = @user.email
+        p
+          | アカウント名：
+          = f.text_field :name
+        = submit_tag "編集"

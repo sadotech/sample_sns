@@ -1,0 +1,114 @@
+doctype html
+html
+  head
+    title
+      | About | Ruby on Rails Tutorial Sample App
+  body
+    - if !session[:login_id]
+      p
+        | ログインしてください。
+      p
+        = link_to "ログイン", login_path
+    - else
+      h1
+        | 投稿詳細
+      - if @post.replying.present?
+        ul
+          li
+            = link_to User.find(@post.replying.user_id).account_id, user_path(id: @post.replying.user_id)
+            = @post.replying.created_at.strftime("%Y-%m-%d %H:%M:%S")
+          p
+            = @post.replying.content
+          p
+            = link_to "詳細", post_path(id: @post.replying.id)
+            br
+            = link_to "返信", new_post_path(reply: {replying_id: session[:login_id], main_post_id: @post.replying.id})
+            | : 
+            = @post.replying.replied.length
+            br
+            - if @post.replying.shared.map(&:user_id).include?(session[:login_id])
+              = link_to "シェア", destroy_share_path(post: {id: @post.replying.id, share_post_id: @post.replying.shared.find_by(user_id: session[:login_id]).id})
+              | : 
+              = @post.replying.shared.length
+              br
+            - else
+              = link_to "シェア", share_path(post: {id: @post.replying.id})
+              | : 
+              = @post.replying.shared.length
+              br
+            - if @post.replying.likes.find_by(user_id: session[:login_id]).present?
+              = link_to "いいね", like_path(id: @post.replying.likes.find_by(user_id: session[:login_id]).id, like: {post_id: @post.replying.id}), method: :delete
+              | : 
+              = @post.replying.likes.length
+            - else
+              = link_to "いいね", likes_path(like: {post_id: @post.replying.id}), method: :post
+              | : 
+              = @post.replying.likes.length
+              br
+
+      p
+        = link_to User.find(@post.user_id).account_id, user_path(id: @post.user_id)
+        = @post.created_at.strftime("%Y-%m-%d %H:%M:%S")
+      p
+        = @post.content
+      p
+        = link_to "詳細", post_path(id: @post.id)
+        br
+        = link_to "返信", new_post_path(reply: {replying_id: session[:login_id], main_post_id: @post.id})
+        | : 
+        = @post.replied.length
+        br
+        - if @post.shared.map(&:user_id).include?(session[:login_id])
+          = link_to "シェア", destroy_share_path(post: {id: @post.id, share_post_id: @post.shared.find_by(user_id: session[:login_id]).id})
+          | : 
+          = @post.shared.length
+          br
+        - else
+          = link_to "シェア", share_path(post: {id: @post.id})
+          | : 
+          = @post.shared.length
+          br
+        - if @post.likes.find_by(user_id: session[:login_id]).present?
+          = link_to "いいね", like_path(id: @post.likes.find_by(user_id: session[:login_id]).id, like: {post_id: @post.id}), method: :delete
+          | : 
+          = @post.likes.length
+        - else
+          = link_to "いいね", likes_path(like: {post_id: @post.id}), method: :post
+          | : 
+          = @post.likes.length
+          br
+
+      - if @post.replied.present?
+        ul
+          - @post.replied.each do |reply|
+            li
+              = link_to User.find(reply.user_id).account_id, user_path(id: reply.user_id)
+              = reply.created_at.strftime("%Y-%m-%d %H:%M:%S")
+            p
+              = reply.content
+            p
+              = link_to "詳細", post_path(id: reply.id)
+              br
+              = link_to "返信", new_post_path(reply: {replying_id: session[:login_id], main_post_id: reply.id})
+              | : 
+              = reply.replied.length
+              br
+              - if reply.shared.map(&:user_id).include?(session[:login_id])
+                = link_to "シェア", destroy_share_path(post: {id: reply.id, share_post_id: reply.shared.find_by(user_id: session[:login_id]).id})
+                | : 
+                = reply.shared.length
+                br
+              - else
+                = link_to "シェア", share_path(post: {id: reply.id})
+                | : 
+                = reply.shared.length
+                br
+              - if reply.likes.find_by(user_id: session[:login_id]).present?
+                = link_to "いいね", like_path(id: reply.likes.find_by(user_id: session[:login_id]).id, like: {post_id: reply.id}), method: :delete
+                | : 
+                = reply.likes.length
+              - else
+                = link_to "いいね", likes_path(like: {post_id: reply.id}), method: :post
+                | : 
+                = reply.likes.length
+                br

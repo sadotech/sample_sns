@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title
+      | About | Ruby on Rails Tutorial Sample App
+  body
+    - if !session[:login_id]
+      p
+        | ログインしてください。
+      p
+        = link_to "ログイン", login_path
+    - else
+      h1
+        = "#{@user.account_id}がフォローしているアカウント"
+      - @user.following.reverse.each do |f|
+        ul
+
+        p
+          = link_to f.account_id, user_path(f.id)

@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title
+      | About | Ruby on Rails Tutorial Sample App
+  body
+    - if !session[:login_id]
+      p
+        | ログインしてください。
+      p
+        = link_to "ログイン", login_path
+    - else
+      h1
+        | 投稿
+      = form_for @post do |f|
+        p
+          | 投稿内容：
+          = f.text_field :content
+        - if params[:reply]
+          = f.hidden_field :main_post_id, value: params[:reply][:main_post_id]
+          p
+            = submit_tag "返信"
+        - else
+          p
+            = submit_tag "投稿"

@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title
+      | About | Ruby on Rails Tutorial Sample App
+  body
+    h1
+      | ログイン
+    - if session[:login_id]
+      p
+        | ログアウトしてください。
+      p
+        = link_to "ログアウト", logout_path, method: :delete
+    - else
+      = form_for :session, url: login_path do |f|
+        p
+          | メールアドレス：
+          = f.text_field :email
+        p
+          | パスワード：
+          = f.text_field :password
+        p
+          = submit_tag "ログイン"
+        p
+          = link_to "新規アカウント作成", new_user_path

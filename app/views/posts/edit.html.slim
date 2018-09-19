@@ -1,0 +1,10 @@
+- if !session[:login_id]
+  p
+    | ログインしてください。
+  p
+    = link_to "ログイン", login_path
+- else
+  h1
+    | Posts#edit
+  p
+    | Find me in app/views/posts/edit.html.erb

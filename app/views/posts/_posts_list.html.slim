@@ -1,0 +1,43 @@
+ul
+  - @posts.each do |post|
+    - if post.sharing.present?
+      = User.find(post.user_id).account_id
+      | さんがシェア 
+      - share_post_id = post.id
+      - post = post.sharing
+    li
+      = link_to User.find(post.user_id).account_id, user_path(id: post.user_id)
+      = post.created_at.strftime("%Y-%m-%d %H:%M:%S")
+    p
+      - if post.replying.present?
+        |  to: 
+        = link_to User.find(post.replying.user_id).account_id, user_path(id: User.find(post.replying.user_id).id)
+        br
+      = post.content
+      br
+    p
+      = link_to "詳細", post_path(id: post.id)
+      br
+      = link_to "返信", new_post_path(reply: {replying_id: session[:login_id], main_post_id: post.id})
+      | : 
+      = post.replied.length
+      br
+      - if post.shared.map(&:user_id).include?(session[:login_id])
+        = link_to "シェア", destroy_share_path(post: {id: post.id, share_post_id: post.shared.find_by(user_id: session[:login_id]).id})
+        | : 
+        = post.shared.length
+        br
+      - else
+        = link_to "シェア", share_path(post: {id: post.id})
+        | : 
+        = post.shared.length
+        br
+      - if post.likes.find_by(user_id: session[:login_id]).present?
+        = link_to "いいね", like_path(id: post.likes.find_by(user_id: session[:login_id]).id, like: {post_id: post.id}), method: :delete
+        | : 
+        = post.likes.length
+      - else
+        = link_to "いいね", likes_path(like: {post_id: post.id}), method: :post
+        | : 
+        = post.likes.length
+        br

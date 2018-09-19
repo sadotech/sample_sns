@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title
+      | About | Ruby on Rails Tutorial Sample App
+  body
+    - if !session[:login_id]
+      p
+        | ログインしてください。
+      p
+        = link_to "ログイン", login_path
+    - else
+      h1
+        | ユーザー情情
+      - @users.each do |user|
+        ul
+          li
+            | ユーザーID：
+            = user.id
+          li
+            | アカウントID：
+            = user.account_id
+          li
+            | メールアドレス：
+            = user.email
+          li
+            | アカウント名：
+            = user.name

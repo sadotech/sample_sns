@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title
+      | About | Ruby on Rails Tutorial Sample App
+  body
+    - if params[:no_login]
+      p
+        | ログインしてください。
+    - else
+      p
+        | ログアウトが完了しました。
+    p
+      = link_to "ログイン", login_path
